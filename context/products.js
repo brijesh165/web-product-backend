@@ -1,15 +1,13 @@
 let mongoose = require('mongoose');
 
 let Products = new mongoose.Schema({
-    product_id: {
-        type: String,
-        required: true,
-        unique: true,
-        index: true
-    },
     product_name: {
         type: String,
         required: true,
+    },
+    image: {
+        type: String,
+        required: true
     },
     product_description: {
         type: String,

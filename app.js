@@ -1,35 +1,36 @@
-import express from 'express';
-import cors from 'cors';
-import http from 'http';
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+require('dotenv').config({});
 
-import * as productRouter from './routes/users';
+const app = express();
 
+app.use(cors());
 // import { mongoConnect } from './utils/mongoconnection';
 
 // const usersRouter = require('./routes/users');
 
-const app = express();
-let router = express.Router();
+const httpServer = require('http').Server(app);
 
-const httpServer = http.Server(app);
-
-router.use('/product', productRouter);
+require('./routes')(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
-require('./routes')(app);
+// require('./routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -47,8 +48,8 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-httpServer.listen(process.env.PORT || 3002, function () {
-  console.log("Http Server is running on port 3002");
+httpServer.listen(process.env.PORT || 3001, function () {
+  console.log("Http Server is running on port " + process.env.PORT);
 })
 
 module.exports = app;
