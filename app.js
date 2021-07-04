@@ -9,9 +9,6 @@ require('dotenv').config({});
 const app = express();
 
 app.use(cors());
-// import { mongoConnect } from './utils/mongoconnection';
-
-// const usersRouter = require('./routes/users');
 
 const httpServer = require('http').Server(app);
 
@@ -23,7 +20,7 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 //app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
