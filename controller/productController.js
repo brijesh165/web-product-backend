@@ -1,5 +1,5 @@
 const db = require('./../context/contextManager');
-
+const fs = require('fs');
 const _controller = {};
 
 /**
@@ -72,18 +72,18 @@ _controller.editProduct = async function (req, res) {
 
 /**
  * 
- * @param {*} id 
+ * @param {*} product_id 
  */
 _controller.deleteProduct = async function (req, res) {
     try {
 
-        fs.unlinkSync(req.body.imagepath);
-        await db.productsModel.findByIdAndDelete(req.body.id);
+        fs.unlinkSync('public/' + req.body.imagepath);
+        await db.productsModel.findByIdAndDelete(req.body.product_id);
 
 
         res.send({
             status: 200,
-            id: req.body.id
+            id: req.body.product_id
         })
     } catch (error) {
         console.log("Delete Product Error: ", error)

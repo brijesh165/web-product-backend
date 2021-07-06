@@ -10,6 +10,8 @@ const app = express();
 
 app.use(cors());
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const httpServer = require('http').Server(app);
 
 require('./routes')(app);
@@ -19,8 +21,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 //app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

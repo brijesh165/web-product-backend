@@ -23,6 +23,6 @@ module.exports = function (app) {
     ], formValidationMiddleware, productController.editProduct);
 
     app.post("/delete-product", [
-        check("id").not().isEmpty().withMessage("Product id is required")
+        check("product_id").not().isEmpty().withMessage("Product id is required")
     ], formValidationMiddleware, productController.deleteProduct);
 }
